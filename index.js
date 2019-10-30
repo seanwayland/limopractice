@@ -43,22 +43,10 @@ class App extends React.Component {
 
 
 
-    this.state = {
-        data: null,
-      };
-    }
-    componentDidMount() {
-        fetch('http://jsonplaceholder.typicode.com/posts')
-        .then(response => response.json())
-         /* .then(json => console.log(json)) */
 
-        
-        .then(data => this.setState({ data }));
-        
-        
     }
+
   
-    
 
     render() {
         
