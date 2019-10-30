@@ -76,6 +76,8 @@ class App extends React.Component {
                         <TextField
           placeholder="Type in Content"
           label="Type in Content">  </TextField>
+
+          <Typo/>
          
 
               <FixedSizeList height={400} width={360} itemSize={46} itemCount={200}>
@@ -145,6 +147,25 @@ class TableRow extends React.Component {
         );
     }
 }
+
+class Typo extends React.Component {
+    render() {
+      return (
+        <div>
+          <AppBar color="primary" position="static">
+            <Toolbar>
+              <TypoGraphy variant="title"
+                color="inherit"
+              >
+                My header
+             </TypoGraphy>
+            </Toolbar>
+          </AppBar>
+  
+        </div>
+      );
+    }
+  }
 
 
 
