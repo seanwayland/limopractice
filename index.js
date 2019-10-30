@@ -77,13 +77,9 @@ class App extends React.Component {
           placeholder="Type in Content"
           label="Type in Content">  </TextField>
 
-          <Typo/>
+          <LimoList/>
          
 
-              <FixedSizeList height={400} width={360} itemSize={46} itemCount={200}>
-              
-        {renderRow}
-      </FixedSizeList> }
 
                   <Button variant="contained" color="primary">
         Welcome Material UI
@@ -148,19 +144,44 @@ class TableRow extends React.Component {
     }
 }
 
-class Typo extends React.Component {
+class LimoList extends React.Component {
+
+    constructor() {
+        super();
+
+    this.state = {
+        data: null,
+      };
+    }
+
+    componentDidMount() {
+        fetch('http://jsonplaceholder.typicode.com/posts')
+        .then(response => response.json())
+         /* .then(json => console.log(json)) */
+     
+
+        
+        .then(data => this.setState({ data }));
+        
+        
+    }
+
+   
+
+    
     render() {
       return (
         <div>
-          <AppBar color="primary" position="static">
-            <Toolbar>
-              <TypoGraphy variant="title"
-                color="inherit"
-              >
-                My header
-             </TypoGraphy>
-            </Toolbar>
-          </AppBar>
+
+        
+
+        {/*<FixedSizeList height={400} width={360} itemSize={46} itemCount={200}> */}
+        <ListItem button  >
+            
+        <ListItemText primary={`Item ${this.state.data}`} />
+      </ListItem>
+      
+   
   
         </div>
       );
