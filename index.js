@@ -9,6 +9,10 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { FixedSizeList } from 'react-window';
 
+
+import ListSubheader from '@material-ui/core/ListSubheader';
+
+
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar'
 import TypoGraphy from '@material-ui/core/Typography'
@@ -40,13 +44,7 @@ class App extends React.Component {
     constructor() {
         super();
 
-
-
-
-
     }
-
-  
 
     render() {
         
@@ -72,25 +70,6 @@ class App extends React.Component {
                   <Button variant="contained" color="primary">
         Welcome Material UI
       </Button> 
-
-                {/*
-                <h1>{this.state.header}</h1>
-                <h2>{this.state.content}</h2>
-
-                <h3>Array: {this.props.propArray}</h3>
-                <h3>Bool: {this.props.propBool ? "True..." : "False..."}</h3>
-                <h3>Func: {this.props.propFunc(3)}</h3>
-                <h3>Number: {this.props.propNumber}</h3>
-                <h3>String: {this.props.propString}</h3>
-                <h3>Object: {this.props.propObject.objectName1}</h3>
-                <h3>Object: {this.props.propObject.objectName2}</h3>
-                <h3>Object: {this.props.propObject.objectName3}</h3>
-                */}
-
-
-
-               {/* <Stuff/> */}
-
 
 
             </div>
@@ -147,30 +126,40 @@ class LimoList extends React.Component {
         .then(response => response.json())
          /* .then(json => console.log(json)) */
      
-
-        
         .then(data => this.setState({ data }));
-        
+           
         
     }
 
-   
-
-    
+ 
     render() {
+        
       return (
         <div>
-
+   
+        <List  subheader={<li />}>
+      {[0, 1, 2, 3, 4].map(sectionId => (
+        <li key={`section-${sectionId}`} >
+          <ul >
+            <ListSubheader>{`I'm sticky ${sectionId}`}</ListSubheader>
+            {this.state.data.map(item => (
+              <ListItem key={`item-${sectionId}-${item.id}`}>
+                <ListItemText primary={`Item ${item.body}`} />
+              </ListItem>
+            ))}
+          </ul>
+        </li>
+      ))}
+    </List>
+ 
         
 
-        {/*<FixedSizeList height={400} width={360} itemSize={46} itemCount={200}> */}
-        <ListItem button  >
-            
-        <ListItemText primary={`Item ${this.state.data}`} />
-      </ListItem>
+              {/*}  <ListItemText primary={`Item ${this.state.data}`} /> */}
       
-   
-  
+        
+    
+        
+    }
         </div>
       );
     }
