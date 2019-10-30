@@ -1,36 +1,46 @@
 import React from "react"
+import List from '@material-ui/core/List';
+import TextField from '@material-ui/core/TextField';
+
+
+import PropTypes from 'prop-types';
+import { makeStyles } from '@material-ui/core/styles';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import { FixedSizeList } from 'react-window';
+
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar'
+import TypoGraphy from '@material-ui/core/Typography'
+
+import Button from '@material-ui/core/Button';
+
 // import { Provider } from 'react-redux';
 // import AutoComplete from '../components/PostAutoComplete'
 // import {store} from '../store'
+
+function renderRow(props) {
+    const { index, style } = props;
+    
+  
+    return (
+      <ListItem button style={style} key={index}>
+        <ListItemText primary={`Item ${index + 1}`} />
+      </ListItem>
+    );
+  }
+
+
+  renderRow.propTypes = {
+    index: PropTypes.number.isRequired,
+    style: PropTypes.object.isRequired,
+  };
+
 class App extends React.Component {
     constructor() {
         super();
 
 
-        {/**
-        this.state = {
-            header: "Header from state...",
-            content: "Content from state...",
-            data:
-                [
-                    {
-                        "id":1,
-                        "name":"Seano",
-                        "age":"30"
-                    },
-                    {
-                        "id":2,
-                        "name":"Stevo",
-                        "age":"35"
-                    },
-                    {
-                        "id":3,
-                        "name":"Bob",
-                        "age":"25"
-                    }
-                ]
-        }
-        */}
 
 
     this.state = {
@@ -51,16 +61,33 @@ class App extends React.Component {
     
 
     render() {
+        
         return (
             <div>
-                <Header/>
+                {/*<Header/>*/}
                 <table>
                     <tbody>
-                        {  console.log(this.state.data) }
+                      
                     { /* this.state.data.map((person, i) => <TableRow key = {i}
                                                                   data = {person} />)     */}  
                     </tbody>
                 </table>
+
+                        <TextField
+          placeholder="Type in Content"
+          label="Type in Content">  </TextField>
+         
+
+              <FixedSizeList height={400} width={360} itemSize={46} itemCount={200}>
+              
+        {renderRow}
+      </FixedSizeList> }
+
+                  <Button variant="contained" color="primary">
+        Welcome Material UI
+      </Button> 
+
+                {/*
                 <h1>{this.state.header}</h1>
                 <h2>{this.state.content}</h2>
 
@@ -72,10 +99,11 @@ class App extends React.Component {
                 <h3>Object: {this.props.propObject.objectName1}</h3>
                 <h3>Object: {this.props.propObject.objectName2}</h3>
                 <h3>Object: {this.props.propObject.objectName3}</h3>
+                */}
 
 
 
-                <Stuff/>
+               {/* <Stuff/> */}
 
 
 
@@ -128,6 +156,7 @@ App.defaultProps = {
     propFunc: function (e) {
         return e
     },
+    
     propNumber: 1,
     propString: "Lets Do this...",
 
