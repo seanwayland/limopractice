@@ -70,6 +70,7 @@ class App extends React.Component {
 
 
 
+
         return (
             <div>
                 {/*<Header/>*/}
@@ -90,6 +91,25 @@ class App extends React.Component {
                 <Button variant="contained" color="primary">
                     Welcome Material UI
                 </Button>
+
+
+
+                <List subheader={<li />}>
+
+                    {[0, 1, 2, 3, 4].map(sectionId => (
+                        <li key={`section-${sectionId}`} >
+                            <ul>
+                                <ListSubheader>{`I'm sticky ${sectionId}`}</ListSubheader>
+                                {/* {this.state.data.map(item => ( */}
+                                {[0, 1, 2].map(item => (
+                                    <ListItem key={`item ${item.id}`}>
+                                        <ListItemText primary={`Item ${item.body}`} />
+                                    </ListItem>
+                                ))}
+                            </ul>
+                        </li>
+                    ))}
+                </List>
 
 
             </div>
@@ -164,22 +184,7 @@ class LimoList extends React.Component {
                 </List>
                 */}
 
-                <List subheader={<li />}>
 
-                    {[0, 1, 2, 3, 4].map(sectionId => (
-                        <li key={`section-${sectionId}`} >
-                            <ul>
-                                <ListSubheader>{`I'm sticky ${sectionId}`}</ListSubheader>
-                                {this.state.data.map(item => (
-                                   /*  {[0, 1, 2].map(item => ( */
-                                    <ListItem key={`item ${item.id}`}>
-                                        <ListItemText primary={`Item ${item.body}`} />
-                                    </ListItem>
-                                ))}
-                            </ul>
-                        </li>
-                    ))}
-                </List>
 
 
 
