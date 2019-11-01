@@ -19,6 +19,11 @@ import TypoGraphy from '@material-ui/core/Typography'
 
 import Button from '@material-ui/core/Button';
 
+import Autocomplete from '@material-ui/lab/Autocomplete';
+
+
+
+
 // import { Provider } from 'react-redux';
 // import AutoComplete from '../components/PostAutoComplete'
 // import {store} from '../store'
@@ -73,8 +78,33 @@ class App extends React.Component {
 
 
         else {
+            const limo = this.state.data ;
+            return (
+                <div >
+
+                    <Autocomplete
+                        freeSolo
+                        disableClearable
+                        options={limo.map(option => option.title)}
+                        renderInput={params => (
+                            <TextField
+                                {...params}
+                                label="Type In Content"
+                                margin="normal"
+                                variant="outlined"
+                                fullWidth
+                                InputProps={{ ...params.InputProps, type: 'search' }}
+                            />
+                        )}
+                    />
+                </div>
+            );
 
 
+
+
+
+            {/**
 
         const limo = this.state.data ;
         {console.log(limo)}
@@ -84,7 +114,7 @@ class App extends React.Component {
 
         return (
             <div>
-                {/*<Header/>*/}
+
 
 
                 {console.log(limo)}
@@ -95,37 +125,33 @@ class App extends React.Component {
                     placeholder="Type in Content"
                     label="Type in Content">  </TextField>
 
-                {/*} <LimoList/> */}
 
 
 
-                <Button variant="contained" color="primary">
-                    Welcome Material UI
-                </Button>
 
 
 
-                <List subheader={<li />}>
 
-                    {[0, 1, 2, 3, 4].map(sectionId => (
-                        <li key={`section-${sectionId}`} >
-                            <ul>
-                                <ListSubheader>{`I'm sticky ${sectionId}`}</ListSubheader>
+
+                <List>
+
+
                                  {limo.map(item => (
 
                                     <ListItem key={`item ${item.id}`}>
                                         <ListItemText primary={`Item ${item.body}`} />
                                     </ListItem>
                                 ))}
-                            </ul>
-                        </li>
-                    ))}
+
+
                 </List>
 
 
             </div>
         );
-    }}
+    } **/}
+             }
+    }
 }
 class Header extends React.Component {
     render() {
