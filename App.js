@@ -39,6 +39,21 @@ function renderRow(props) {
     );
 }
 
+function handleChangeInput(inputVal) {
+    const t = inputVal.split(",");
+    if (JSON.stringify(t) !== JSON.stringify(this.state.selectedItem)) {
+        this.setState({ inputValue: inputVal });
+    }
+}
+
+function handleChange (selectedItem) {
+    if (this.state.selectedItem.includes(selectedItem)) {
+        this.removeSelectedItem(selectedItem);
+    } else {
+        this.addSelectedItem(selectedItem);
+    }
+};
+
 
 renderRow.propTypes = {
     index: PropTypes.number.isRequired,
@@ -52,6 +67,7 @@ class App extends React.Component {
         this.state = {
             data: null,
             isLoaded : false,
+
         };
     }
 
@@ -85,16 +101,25 @@ class App extends React.Component {
                     <Autocomplete
                         freeSolo
                         disableClearable
-                        options={limo.map(option => option.title)}
+                        onInputValueChange={this.handleChangeInput}
+                        onChange={this.handleChange}
+                        options={limo.map(option =>  "body: '" + option.body   + '\n' + "' id: " + option.id )}
                         renderInput={params => (
+
                             <TextField
                                 {...params}
                                 label="Type In Content"
+
                                 margin="normal"
                                 variant="outlined"
                                 fullWidth
                                 InputProps={{ ...params.InputProps, type: 'search' }}
+
+
+
                             />
+
+
                         )}
                     />
                 </div>
