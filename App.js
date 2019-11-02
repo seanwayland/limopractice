@@ -39,20 +39,9 @@ function renderRow(props) {
     );
 }
 
-function handleChangeInput(inputVal) {
-    const t = inputVal.split(",");
-    if (JSON.stringify(t) !== JSON.stringify(this.state.selectedItem)) {
-        this.setState({ inputValue: inputVal });
-    }
-}
 
-function handleChange (selectedItem) {
-    if (this.state.selectedItem.includes(selectedItem)) {
-        this.removeSelectedItem(selectedItem);
-    } else {
-        this.addSelectedItem(selectedItem);
-    }
-};
+
+
 
 
 renderRow.propTypes = {
@@ -67,6 +56,8 @@ class App extends React.Component {
         this.state = {
             data: null,
             isLoaded : false,
+            itemSelected : false,
+            inputVal: null
 
         };
     }
@@ -82,13 +73,31 @@ class App extends React.Component {
     }
 
 
+    handleChangeInput(s)  {
+
+        console.log(s);
+
+    };
+
+
+
+
     render() {
 
         var isloaded = this.state.isLoaded ;
+        var itemSelected = this.state.itemSelected ;
+        var myState = this.state ;
+
 
 
         if (!isloaded){
             return <div> loading ...</div>;
+        }
+
+
+        else if(itemSelected)
+        {
+            return <div> item selected </div>
         }
 
 
@@ -101,9 +110,12 @@ class App extends React.Component {
                     <Autocomplete
                         freeSolo
                         disableClearable
-                        onInputValueChange={this.handleChangeInput}
-                        onChange={this.handleChange}
-                        options={limo.map(option =>  "body: '" + option.body   + '\n' + "' id: " + option.id )}
+
+
+                        onChange={(e) => { this.setState({ e, itemSelected :true  });
+                       }
+                        }
+                        options={limo.map(option =>  "body: '" + option.body   + '\n' + "'      id: " + option.id )}
                         renderInput={params => (
 
                             <TextField
