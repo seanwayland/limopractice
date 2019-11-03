@@ -1,47 +1,27 @@
 import React from "react"
-import List from '@material-ui/core/List';
+
 import TextField from '@material-ui/core/TextField';
 
 
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
+
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import { FixedSizeList } from 'react-window';
 
-
-import ListSubheader from '@material-ui/core/ListSubheader';
-
-
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar'
-import TypoGraphy from '@material-ui/core/Typography'
-
-import Button from '@material-ui/core/Button';
 
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
 
-
-
-// import { Provider } from 'react-redux';
-// import AutoComplete from '../components/PostAutoComplete'
-// import {store} from '../store'
-
 function renderRow(props) {
-    const { index, style } = props;
+    const {index, style} = props;
 
 
     return (
         <ListItem button style={style} key={index}>
-            <ListItemText primary={`Item ${index + 1}`} />
+            <ListItemText primary={`Item ${index + 1}`}/>
         </ListItem>
     );
 }
-
-
-
-
 
 
 renderRow.propTypes = {
@@ -50,13 +30,15 @@ renderRow.propTypes = {
 };
 
 class App extends React.Component {
+
+
     constructor(props) {
         super(props);
 
         this.state = {
             data: null,
-            isLoaded : false,
-            itemSelected : false,
+            isLoaded: false,
+            itemSelected: false,
             inputVal: null
 
         };
@@ -67,67 +49,50 @@ class App extends React.Component {
             .then(response => response.json())
             /* .then(json => console.log(json)) */
 
-            .then(data => this.setState({ data, isLoaded :true  }));
+            .then(data => this.setState({data, isLoaded: true}));
 
 
     }
 
-
-    handleChangeInput(s)  {
-
-        console.log(s);
-
-    };
-
-
-
-
     render() {
 
-        var isloaded = this.state.isLoaded ;
-        var itemSelected = this.state.itemSelected ;
-        var myState = this.state ;
+        var isloaded = this.state.isLoaded;
+        var itemSelected = this.state.itemSelected;
 
 
-
-        if (!isloaded){
+        if (!isloaded) {
             return <div> loading ...</div>;
-        }
-
-
-        else if(itemSelected)
-        {
+        } else if (itemSelected) {
             return <div> item selected </div>
-        }
-
-
-
-        else {
-            const limo = this.state.data ;
+        } else {
+            const limo = this.state.data;
             return (
-                <div >
+                <div>
 
                     <Autocomplete
                         freeSolo
                         disableClearable
 
-
-                        onChange={(e) => { this.setState({ e, itemSelected :true  });
-                       }
+                        onChange={(e) => {
+                            this.setState({e, itemSelected: true});
+                            alert(e.target.value);
                         }
-                        options={limo.map(option =>  "body: '" + option.body   + '\n' + "'      id: " + option.id )}
+                        }
+
+                        options={limo.map(option => "body: '" + option.body + '\n' + "'      id: " + option.id)}
                         renderInput={params => (
 
                             <TextField
                                 {...params}
                                 label="Type In Content"
+                                id="limoText"
+                                value = {this.state.inputValue}
+
 
                                 margin="normal"
                                 variant="outlined"
                                 fullWidth
-                                InputProps={{ ...params.InputProps, type: 'search' }}
-
-
+                                InputProps={{...params.InputProps, type: 'search'}}
 
                             />
 
@@ -137,148 +102,14 @@ class App extends React.Component {
                 </div>
             );
 
-
-
-
-
-            {/**
-
-        const limo = this.state.data ;
-        {console.log(limo)}
-
-
-
-
-        return (
-            <div>
-
-
-
-                {console.log(limo)}
-
-
-
-                <TextField
-                    placeholder="Type in Content"
-                    label="Type in Content">  </TextField>
-
-
-
-
-
-
-
-
-
-                <List>
-
-
-                                 {limo.map(item => (
-
-                                    <ListItem key={`item ${item.id}`}>
-                                        <ListItemText primary={`Item ${item.body}`} />
-                                    </ListItem>
-                                ))}
-
-
-                </List>
-
-
-            </div>
-        );
-    } **/}
-             }
+        }
     }
 }
-class Header extends React.Component {
-    render() {
-        return (
-            <div>
-                <h1>Header</h1>
-            </div>
-        );
-    }
-}
-
-class Stuff extends React.Component {
-    render() {
-        return (
-            <div>
-                <h1>Mortgage Master</h1>
-                <h2>loves me </h2>
-                <p>This is it!!!</p>
-
-
-            </div>
-        );
-    }
-}
-class TableRow extends React.Component {
-    render() {
-        return (
-            <tr>
-                <td>{this.props.data.id}</td>
-                <td>{this.props.data.name}</td>
-                <td>{this.props.data.age}</td>
-            </tr>
-        );
-    }
-}
-
-class LimoList extends React.Component {
-
-    constructor() {
-        super();
-
-    }
-
-
-    render() {
-
-
-
-        return (
-            <div>
-
-
-                {/*
-                <List  subheader={<li />}>
-                    {[0, 1, 2, 3, 4].map(sectionId => (
-                        <li key={`section-${sectionId}`} >
-                            <ul >
-                                <ListSubheader>{`I'm sticky ${sectionId}`}</ListSubheader>
-                                {this.state.data.map(item => (
-                                    <ListItem key={`item-${sectionId}-${item.id}`}>
-                                        <ListItemText primary={`Item ${item.body}`} />
-                                    </ListItem>
-                                ))}
-                            </ul>
-                        </li>
-                    ))}
-                </List>
-                */}
-
-
-
-
-
-                {/*}  <ListItemText primary={`Item ${this.state.data}`} /> */}
-
-
-
-
-                }
-            </div>
-        );
-    }
-}
-
-
 
 App.defaultProps = {
 
     headerProp: "Header from props...",
-    contentProp:"Content from props...",
+    contentProp: "Content from props...",
     propArray: [1, 2, 3, 4, 5],
     propBool: true,
     propFunc: function (e) {
@@ -294,4 +125,6 @@ App.defaultProps = {
         objectName3: "Gazza"
     }
 }
+
+
 export default App;
