@@ -12,22 +12,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
 
-function renderRow(props) {
-    const {index, style} = props;
-
-
-    return (
-        <ListItem button style={style} key={index}>
-            <ListItemText primary={`Item ${index + 1}`}/>
-        </ListItem>
-    );
-}
-
-
-renderRow.propTypes = {
-    index: PropTypes.number.isRequired,
-    style: PropTypes.object.isRequired,
-};
 
 class App extends React.Component {
 
@@ -39,10 +23,18 @@ class App extends React.Component {
             data: null,
             isLoaded: false,
             itemSelected: false,
-            inputVal: null
+            inputVal: ''}
+
+            this.updateState = this.updateState.bind(this)
 
         };
-    }
+
+        updateState(e) {
+            this.setState({inputVal: e.target.value});
+            this.state.itemSelected = true;
+            console.log(e.target.value)
+        }
+
 
     componentDidMount() {
         fetch('http://jsonplaceholder.typicode.com/posts')
@@ -72,12 +64,16 @@ class App extends React.Component {
                     <Autocomplete
                         freeSolo
                         disableClearable
+                        autoSelect={true}
+                        id = "limoSelect"
+                        onChange={this.updateState}
 
-                        onChange={(e) => {
-                            this.setState({e, itemSelected: true});
-                            alert(e.target.value);
-                        }
-                        }
+                        value = {this.state.inputVal}
+
+
+
+
+
 
                         options={limo.map(option => "body: '" + option.body + '\n' + "'      id: " + option.id)}
                         renderInput={params => (
@@ -86,7 +82,14 @@ class App extends React.Component {
                                 {...params}
                                 label="Type In Content"
                                 id="limoText"
-                                value = {this.state.inputValue}
+                                value = ''
+
+
+                                autoSelect={true}
+
+
+
+
 
 
                                 margin="normal"
@@ -106,25 +109,7 @@ class App extends React.Component {
     }
 }
 
-App.defaultProps = {
-
-    headerProp: "Header from props...",
-    contentProp: "Content from props...",
-    propArray: [1, 2, 3, 4, 5],
-    propBool: true,
-    propFunc: function (e) {
-        return e
-    },
-
-    propNumber: 1,
-    propString: "Lets Do this...",
-
-    propObject: {
-        objectName1: "Bazza",
-        objectName2: "Shazza",
-        objectName3: "Gazza"
-    }
-}
+App.defaultProps = {}
 
 
 export default App;
