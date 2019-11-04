@@ -1,17 +1,6 @@
 import React from "react"
-
 import TextField from '@material-ui/core/TextField';
-
-
-import PropTypes from 'prop-types';
-
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-
-
 import Autocomplete from '@material-ui/lab/Autocomplete';
-
-
 
 class App extends React.Component {
 
@@ -33,8 +22,10 @@ class App extends React.Component {
             this.setState({inputVal: e.target.value});
             this.state.itemSelected = true;
             console.log(e.target.value)
+            // eventually I want to render a DIV with data from the selected value
         }
 
+        /// fetch some data
 
     componentDidMount() {
         fetch('http://jsonplaceholder.typicode.com/posts')
@@ -64,17 +55,10 @@ class App extends React.Component {
                     <Autocomplete
                         freeSolo
                         disableClearable
-                        autoSelect={true}
+                        autoselect="true"
                         id = "limoSelect"
                         onChange={this.updateState}
-
                         value = {this.state.inputVal}
-
-
-
-
-
-
                         options={limo.map(option => "body: '" + option.body + '\n' + "'      id: " + option.id)}
                         renderInput={params => (
 
@@ -83,15 +67,7 @@ class App extends React.Component {
                                 label="Type In Content"
                                 id="limoText"
                                 value = ''
-
-
-                                autoSelect={true}
-
-
-
-
-
-
+                                autoselect="true"
                                 margin="normal"
                                 variant="outlined"
                                 fullWidth
@@ -110,6 +86,5 @@ class App extends React.Component {
 }
 
 App.defaultProps = {}
-
 
 export default App;
