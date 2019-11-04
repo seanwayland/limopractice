@@ -23,10 +23,11 @@ class App extends React.Component {
     //   options: [],
     //   selectedOption: ""
     // };
-    this.state = {list: []};
+    this.state = {list: [], itemSelected: false, selectedItem: null}
 
     this.updateState = this.updateState.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   updateState(e) {
@@ -50,17 +51,21 @@ class App extends React.Component {
 
   }
 
+  handleClick(e, id) {
+
+      console.log(id);
+      console.log(this.state.list);
+      //var filteredClick = this.state.list.filter(it => it.body.includes(e.target));
+      var filteredClick = this.state.list.find(item => item.id === id)
+
+      console.log(filteredClick);
+      this.setState({itemSelected: true})
+      
+       
+
+  }
 
 
-   
-
-
-
-  /// fetch some data
-
-  
-
-  /// fetch some data
 
   componentDidMount() {
     fetch('http://jsonplaceholder.typicode.com/posts')
@@ -76,7 +81,16 @@ class App extends React.Component {
     const list = this.state.list
 
 
+   
+    if (itemSelected){
 
+        return (
+
+         <div> item selected </div>
+        )
+    }
+
+    else {
     return (
        <div>
      
@@ -98,7 +112,8 @@ class App extends React.Component {
         {
             list.map(item => (
                 <ListItem key={`item-${item.id}`}>
-                <ListItemText primary={`Item ${item.body}`} secondary={item.id}/>
+                <ListItemText onClick={event => this.handleClick(event, item.id)} primary={`Item ${item.body}`} secondary={item.id}/>
+                on
                 
                 </ListItem> 
                 )
@@ -109,18 +124,9 @@ class App extends React.Component {
      </div>
 
     )
+    }
           
-        
 
-    
-
-    // if (!isLoaded) {
-    //   return <div> loading ...</div>;
-    // } else if (itemSelected) {
-    //   return <div> {this.state.selectedOption} </div>;
-    // } else {
-    //   return <>{autoCompleteRender}</>;
-    // }
   }
 }
 
