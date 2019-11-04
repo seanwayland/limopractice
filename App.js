@@ -19,11 +19,15 @@ class App extends React.Component {
         };
 
         updateState(e) {
-            this.setState({inputVal: e.target.value});
-            this.state.itemSelected = true;
-            console.log(e.target.value)
+            e.persist()
+            const newValue = e.target.value
+            this.setState({inputVal: newValue, itemSelected: true});
+            console.log(e.target.value);
+
             // eventually I want to render a DIV with data from the selected value
         }
+
+
 
         /// fetch some data
 
@@ -39,11 +43,12 @@ class App extends React.Component {
 
     render() {
 
-        var isloaded = this.state.isLoaded;
-        var itemSelected = this.state.itemSelected;
+        const {isLoaded, itemSelected} = this.state;
 
 
-        if (!isloaded) {
+
+
+        if (!isLoaded) {
             return <div> loading ...</div>;
         } else if (itemSelected) {
             return <div> item selected </div>
@@ -57,9 +62,11 @@ class App extends React.Component {
                         disableClearable
                         autoselect="true"
                         id = "limoSelect"
-                        onChange={this.updateState}
+
                         value = {this.state.inputVal}
-                        options={limo.map(option => "body: '" + option.body + '\n' + "'      id: " + option.id)}
+                        options={ limo.map(option => "body: '" + option.body + '\n' + "'      id: " + option.id)}
+                        onChange={this.updateState}
+
                         renderInput={params => (
 
                             <TextField
